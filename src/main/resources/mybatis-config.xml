@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<settings>
+		<!-- 开启自动驼峰命名规则（camel case）映射 -->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<!-- 懒加载开启 -->
+		<setting name="lazyLoadingEnabled" value="true" />
+		<!-- 开启任何方法的调用都会加载该对象的所有属性。否则，每个属性会按需加载 -->
+		<setting name="aggressiveLazyLoading" value="false" />
+	</settings>
+
+	<plugins>
+		<!--分页插件拦截器 -->
+		<plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+	</plugins>
+	
+</configuration>

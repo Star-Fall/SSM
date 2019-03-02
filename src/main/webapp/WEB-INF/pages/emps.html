@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <link href="../resources/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../resources/css/emps.css">
+    <script src="../resources/js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../resources/bootstrap-3.3.7/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../resources/js/util/dateUtil.js" type="text/javascript"></script>
+    <script src="../resources/js/commConfig.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <!-- 首页导航Bar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="">Project name</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="">Home</a></li>
+                    <li><a href="">About</a></li>
+                    <li><a href="">Contact</a></li>
+                </ul>
+                <!-- 文件上传下载模块 -->
+                <div class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input type="file" id="file" class="form-control" />
+                        <input type="text" id="desc" class="form-control" placeholder="文件描述">
+                        <button type="button" id="up_file" class="btn btn-success">上传</button>
+                    </div>
+                    <a href="/file/file_down_load?fileName=新建文本文档.txt"><button type="button"  id="down_file"  class="btn btn-danger">下载</button></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- 主体 -->
+    <div class="container-fluid">
+        <div class="container">
+            <!-- 分页和全部信息选择bar -->
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a id="page_emp" class="navbar-brand" href="#">PAGE EMP</a></li>
+                        </ul>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class=""><a id="all_emp" class="navbar-brand" href="#">ALL EMP</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- 分页信息幕 -->
+            <div class="jumbotron" id="page_emp_jumbotron">
+                <table class="table table-striped" id="page_emps_table">
+                    <caption><h3>分页员工信息</h3>
+                    </caption>
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>phone</th>
+                            <th>HireDate</th>
+                            <th>Salary</th>
+                            <th class='text-center'>操作<th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <!-- 分页条 -->
+                <nav aria-label="Page navigation">
+                    <ul class="pagination" id="page_nav_ul">
+                    </ul>
+                </nav>
+                <nav aria-label="Page navigation" id="page_nav_info">
+                </nav>
+            </div>
+            <!-- 所有员工信息幕 -->
+            <div class="jumbotron" id="all_emp_jumbotron">
+                <table class="table table-striped" id="all_emps_table">
+                    <caption><h3>所有员工信息</h3>
+                    </caption>
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>phone</th>
+                            <th>HireDate</th>
+                            <th>Salary</th>
+                            <th class='text-center'>操作<th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" color="255,0,0" opacity='0.7' count='200' src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+</body>
+<script type="text/javascript">
+getEmpPage(1, GBasePageSize);
+
+/**
+ * 点击查看全部emp
+ */
+$("#all_emp").click(function(event) {
+    $("#page_emp_jumbotron").hide();
+    $("#all_emp_jumbotron").show();
+    $("#all_emp").parent().addClass('active');
+    $("#page_emp").parent().removeClass('active');
+
+    getAllEmp();
+});
+
+/**
+ * 点击分页查看emp
+ */
+$("#page_emp").click(function(event) {
+    $("#all_emp_jumbotron").hide();
+    $("#page_emp_jumbotron").show();
+    $("#page_emp").parent().addClass('active');
+    $("#all_emp").parent().removeClass('active');
+    getEmpPage(1, GBasePageSize);
+});
+
+/**
+ * 分页获取员工信息
+ * @param  {[type]} pageNum  [页码]
+ * @param  {[type]} pageSize [大小]
+ * @return {[type]}          [description]
+ */
+function getEmpPage(pageNum, pageSize) {
+    $("#all_emp_jumbotron").hide();
+    $("#page_emp_jumbotron").show();
+    $("#page_emp").parent().addClass('active');
+    $("#all_emp").parent().removeClass('active');
+    $.ajax({
+            url: '/emps/get_emps_page',
+            type: 'GET',
+            data: { 'pageNum': pageNum, 'pageSize': pageSize },
+            success: function(response) {
+                var emps = response.data.list;
+                loadTableData("#page_emps_table tbody", emps);
+                loadPageNav(response.data);
+                loadPageInfo(response.data);
+            }
+        })
+        .fail(function() {
+            //console.log("error");
+        })
+
+}
+
+/**
+ * 获取所有的emp信息
+ * @return {[type]} [description]
+ */
+function getAllEmp() {
+    $("#page_emp_jumbotron").hide();
+    $("#all_emp_jumbotron").show();
+    $("#all_emp").parent().addClass('active');
+    $("#page_emp").parent().removeClass('active');
+    $.ajax({
+            url: '/emps/get_all_emps',
+            type: 'GET',
+            success: function(response) {
+                var emps = response.list;
+                loadTableData("#all_emps_table tbody", emps);
+            }
+        })
+        .fail(function() {
+            //alert("error");
+        })
+}
+
+/**
+ * table加载数据
+ * @param  {[type]} itemId [table的id]
+ * @param  {[type]} data   [emp数据]
+ */
+function loadTableData(itemId, data) {
+    $(itemId).empty();
+    $.each(data, function(index, item) {
+        var empId = $("<th></th>").append(item.employeeId);
+        var firstName = $("<td></td>").append(item.firstName);
+        var lastName = $("<td></td>").append(item.lastName);
+        var email = $("<td></td>").append(item.email);
+        var phone = $("<td></td>").append(item.phoneNumber);
+        var hireDate = $("<td></td>").append(longtimeToDate(item.hireDate));
+        var salary = $("<td></td>").append(item.salary);
+        //按钮
+        var viewBtn = $("<button></button>").addClass("btn btn-info btn-sm")
+            .append($("<span></span>").addClass("glyphicon glyphicon-eye-open")).append("&nbsp;&nbsp;查看");
+        var editBtn = $("<button></button>").addClass("btn btn-primary btn-sm")
+            .append($("<span></span>").addClass("glyphicon glyphicon-edit")).append("&nbsp;&nbsp;编辑");
+        var delBtn = $("<button></button>").addClass("btn btn-danger btn-sm")
+            .append($("<span></span>").addClass("glyphicon glyphicon-trash")).append("&nbsp;&nbsp;删除");
+        var btnTd = $("<td></td>").addClass("text-center").append(viewBtn).append(" ").append(editBtn).append(" ").append(delBtn);
+        $("<tr></tr>").append(empId)
+            .append(firstName)
+            .append(lastName)
+            .append(email)
+            .append(phone)
+            .append(hireDate)
+            .append(salary)
+            .append(btnTd)
+            .appendTo(itemId);
+    });
+}
+
+/**
+ * 加载分页条
+ * @param  {[type]} data [分页条数据]
+ * @return {[type]}      [description]
+ */
+function loadPageNav(data) {
+    $("#page_nav_ul").empty();
+    //首页
+    var firstPageLi = $("<li></li>").append($("<a></a>").append("首页").attr("href", "#"));
+    //前一页
+    var prePageLi = $("<li></li>").append($("<a></a>").append("&laquo;").attr("href", "#"));
+
+    if (!data.hasPreviousPage) {
+        prePageLi.addClass("disabled");
+        firstPageLi.addClass("disabled");
+    } else {
+        prePageLi.click(function() {
+            getEmpPage(data.pageNum - 1, GBasePageSize);
+        });
+        firstPageLi.click(function() {
+            getEmpPage(1, GBasePageSize);
+        });
+
+    }
+    $("#page_nav_ul").append(firstPageLi).append(prePageLi);
+    $.each(data.navigatepageNums, function(index, item) {
+        var li = $("<li></li>").append($("<a></a>").append(item).attr("href", "#"));
+        li.click(function() {
+            getEmpPage(item, GBasePageSize);
+        });
+        $("#page_nav_ul").append(li);
+    });
+    //尾页
+    var lastPageLi = $("<li></li>").append($("<a></a>").append("尾页").attr("href", "#"));
+    //下一页
+    var nextPageLi = $("<li></li>").append($("<a></a>").append("&raquo;").attr("href", "#"));
+
+    if (!data.hasNextPage) {
+        nextPageLi.addClass("disabled");
+        lastPageLi.addClass("disabled");
+    } else {
+        nextPageLi.click(function() {
+            getEmpPage(data.pageNum + 1, GBasePageSize);
+        });
+        lastPageLi.click(function() {
+            getEmpPage(data.pages, GBasePageSize);
+        });
+    }
+    $("#page_nav_ul").append(nextPageLi).append(lastPageLi);
+
+}
+
+/**
+ * 加载分页信息
+ * @param  {[type]} data [description]
+ * @return {[type]}      [description]
+ */
+function loadPageInfo(data) {
+    $("#page_nav_info").empty();
+    $("#page_nav_info").append("当前" + data.pageNum + "页,总" +
+        data.pages + "页,总" +
+        data.total + "条记录");
+}
+
+/**
+ * ajax实现文件上传
+ */
+$('#up_file').click(function() {
+    var formData = new FormData();
+    formData.append("file", document.getElementById("file").files[0]);
+    formData.append("desc", $('#desc').val());
+    $.ajax({
+            url: '/file/file_up_load',
+            type: 'POST',
+            data: formData,
+            contentType: false, //必须false才会自动加上正确的Content-Type
+            processData: false,
+            success: function(response) {
+                if (response.code == 200) {
+                    alert("上传成功！");
+                    //清空input
+                    $('#desc').val('');
+                    var obj = document.getElementById('file');
+                    obj.outerHTML = obj.outerHTML;
+                } else if (response.code == 400) {
+                    alert(response.errMsg);
+                }
+            }
+        })
+        .done(function() {
+            console.log("success");
+        })
+        .fail(function() {
+            alert("上传失败！！");
+        })
+        .always(function() {
+            console.log("complete");
+        });
+});
+</script>
+
+</html>
