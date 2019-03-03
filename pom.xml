@@ -8,7 +8,7 @@
 
 	<!-- 定义Spring、MyBatis版本 -->
 	<properties>
-		<spring.version>4.3.7.RELEASE</spring.version>
+		<spring.version>4.3.18.RELEASE</spring.version>
 		<aop.version>1.8.0</aop.version>
 		<mybatis.version>3.4.6</mybatis.version>
 	</properties>
@@ -87,7 +87,7 @@
 		<dependency>
 			<groupId>com.mchange</groupId>
 			<artifactId>c3p0</artifactId>
-			<version>0.9.5.2</version>
+			<version>0.9.5.3</version>
 		</dependency>
 
 		<!-- 日志 -->
@@ -121,7 +121,7 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.9.6</version>
+			<version>2.9.8</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -138,7 +138,7 @@
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
-			<version>1.3.1</version>
+			<version>1.3.3</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
