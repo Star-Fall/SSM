@@ -1,4 +1,4 @@
-# SSM框架 
+# SSM框架 :smile:
 Blog:&emsp;[SSM笔记](https://blog.csdn.net/shaohe18362202126/article/details/87127653)
 ## 一、项目架构
 + 项目管理工具：**Maven**  
