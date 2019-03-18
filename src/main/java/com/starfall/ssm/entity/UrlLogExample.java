@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @name:UrlLogExample
+ * @description: UrlLogExample
+ * @author: StarFall
+ * @data: 2019年3月18日下午9:11:00
+ */
 public class UrlLogExample {
 
 	protected String orderByClause;

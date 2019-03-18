@@ -2,44 +2,50 @@ package com.starfall.ssm.entity;
 
 import java.math.BigDecimal;
 
+/**
+ * @name:Job
+ * @description: Job
+ * @author: StarFall
+ * @data: 2019年3月18日下午9:10:35
+ */
 public class Job {
-    private String jobId;
+	private String jobId;
 
-    private String jobTitle;
+	private String jobTitle;
 
-    private BigDecimal minSalary;
+	private BigDecimal minSalary;
 
-    private BigDecimal maxSalary;
+	private BigDecimal maxSalary;
 
-    public String getJobId() {
-        return jobId;
-    }
+	public String getJobId() {
+		return jobId;
+	}
 
-    public void setJobId(String jobId) {
-        this.jobId = jobId == null ? null : jobId.trim();
-    }
+	public void setJobId(String jobId) {
+		this.jobId = jobId == null ? null : jobId.trim();
+	}
 
-    public String getJobTitle() {
-        return jobTitle;
-    }
+	public String getJobTitle() {
+		return jobTitle;
+	}
 
-    public void setJobTitle(String jobTitle) {
-        this.jobTitle = jobTitle == null ? null : jobTitle.trim();
-    }
+	public void setJobTitle(String jobTitle) {
+		this.jobTitle = jobTitle == null ? null : jobTitle.trim();
+	}
 
-    public BigDecimal getMinSalary() {
-        return minSalary;
-    }
+	public BigDecimal getMinSalary() {
+		return minSalary;
+	}
 
-    public void setMinSalary(BigDecimal minSalary) {
-        this.minSalary = minSalary;
-    }
+	public void setMinSalary(BigDecimal minSalary) {
+		this.minSalary = minSalary;
+	}
 
-    public BigDecimal getMaxSalary() {
-        return maxSalary;
-    }
+	public BigDecimal getMaxSalary() {
+		return maxSalary;
+	}
 
-    public void setMaxSalary(BigDecimal maxSalary) {
-        this.maxSalary = maxSalary;
-    }
+	public void setMaxSalary(BigDecimal maxSalary) {
+		this.maxSalary = maxSalary;
+	}
 }

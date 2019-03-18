@@ -2,6 +2,12 @@ package com.starfall.ssm.entity;
 
 import java.util.Date;
 
+/**
+ * @name:UrlLog
+ * @description: UrlLog
+ * @author: StarFall
+ * @data: 2019年3月18日下午9:10:52
+ */
 public class UrlLog {
 
 	private Integer id;

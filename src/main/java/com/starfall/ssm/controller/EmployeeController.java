@@ -31,6 +31,11 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService employeeService;
 
+	/**
+	 * 获取所有的emp信息
+	 * 
+	 * @return Map
+	 */
 	@RequestMapping("/get_all_emps")
 	public Map<String, Object> getAllEmps() {
 		List<Employee> list = employeeService.getAllEmps();

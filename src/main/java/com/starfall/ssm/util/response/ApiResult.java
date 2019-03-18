@@ -7,11 +7,22 @@ package com.starfall.ssm.util.response;
  * @data: 2019年2月21日下午10:19:41
  */
 public enum ApiResult {
+	/**
+	 * 响应成功
+	 */
+	SUCCESS(200, "响应成功"),
+	/**
+	 * 系统错误
+	 */
+	ERROR(400, "系统错误");
 
-	SUCCESS(200, "响应成功"), ERROR(400, "系统错误");
-
+	/**
+	 * 状态码
+	 */
 	private final int code;
-
+	/**
+	 * 消息
+	 */
 	private final String msg;
 
 	private ApiResult(int code, String msg) {
@@ -22,7 +33,7 @@ public enum ApiResult {
 	/**
 	 * 获取返回结果Map
 	 * 
-	 * @return
+	 * @return ApiResultMap
 	 */
 	public ApiResultMap<String, Object> getMap() {
 		return new ApiResultMap<String, Object>().add("code", this.getCode()).add("msg", this.getMsg());

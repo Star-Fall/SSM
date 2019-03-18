@@ -21,7 +21,9 @@ public class PageParam implements Serializable {
 
 	private String orderBy;
 
-	// 导航页码 【1,2,3,4,5】
+	/**
+	 * 导航页码 【1,2,3,4,5】
+	 */
 	private int navigatePages = 5;
 
 	public PageParam() {

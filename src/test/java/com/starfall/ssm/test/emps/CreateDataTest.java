@@ -33,10 +33,18 @@ import com.starfall.ssm.util.RandomUtil;
 @ContextConfiguration(locations = { "classpath:applicationContext.xml", "classpath:mybatis-config.xml" })
 public class CreateDataTest {
 
+	private static final int DATA_COUNT = 5000;
 	@Autowired
 	private SqlSessionTemplate sqlSessionBatch;
 
 	@Test
+	public void testTest() {
+		System.out.println("通常情况testCreateData()的@Test被注释掉");
+	}
+
+	/**
+	 * @Test
+	 */
 	public void testCreateData() {
 		try {
 			DepartmentMapper depMapper = sqlSessionBatch.getMapper(DepartmentMapper.class);
@@ -45,7 +53,7 @@ public class CreateDataTest {
 			List<Job> jobList = jobMapper.selectByExample(null);
 
 			EmployeeMapper mapper = sqlSessionBatch.getMapper(EmployeeMapper.class);
-			for (int i = 1; i < 5000; i++) {
+			for (int i = 1; i < DATA_COUNT; i++) {
 				String upWord1 = RandomUtil.getRandomStringEnUp(1);
 				String upWord2 = RandomUtil.getRandomStringEnUp(1);
 				int num1 = RandomUtil.getRandomNumRange(3, 6);

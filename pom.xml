@@ -11,8 +11,10 @@
 		<spring.version>4.3.18.RELEASE</spring.version>
 		<aop.version>1.8.0</aop.version>
 		<mybatis.version>3.4.6</mybatis.version>
+		<dependency.locations.enabled>false</dependency.locations.enabled>
 	</properties>
-
+	
+	
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
@@ -77,7 +79,7 @@
 			<artifactId>pagehelper</artifactId>
 			<version>5.1.6</version>
 		</dependency>
-		
+
 		<!-- 数据库 -->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -182,5 +184,51 @@
 			<version>3.4</version>
 		</dependency>
 
+		<!-- Maven mvn site生成站点依赖 -->
+		<dependency>
+			<groupId>org.apache.maven.doxia</groupId>
+			<artifactId>doxia-site-renderer</artifactId>
+			<version>1.8</version>
+		</dependency>
 	</dependencies>
+
+	<!-- Maven mvn site生成站点 -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.7</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.doxia</groupId>
+						<artifactId>doxia-site-renderer</artifactId>
+						<version>1.8</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>3.0.0</version>
+			</plugin>
+		</plugins>
+	</build>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.4</version>
+				<configuration>
+					<additionalparam>-Xdoclint:none</additionalparam>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.9</version>
+			</plugin>
+		</plugins>
+	</reporting>
 </project>

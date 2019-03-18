@@ -29,7 +29,7 @@ public class EmployeeService {
 	/**
 	 * 获取所有的emps
 	 * 
-	 * @return
+	 * @return List
 	 */
 	public List<Employee> getAllEmps() {
 		List<Employee> list = employeeMapper.selectByExample(null);

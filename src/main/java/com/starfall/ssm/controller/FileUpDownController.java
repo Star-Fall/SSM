@@ -32,7 +32,7 @@ public class FileUpDownController {
 	 *            文件描述
 	 * @param file
 	 *            文件
-	 * @return
+	 * @return Map
 	 * @throws Exception
 	 *             异常
 	 */
@@ -56,7 +56,7 @@ public class FileUpDownController {
 	 * 
 	 * @param fileName
 	 *            文件名称
-	 * @return
+	 * @return ResponseEntity
 	 * @throws Exception
 	 *             异常
 	 */
@@ -70,7 +70,8 @@ public class FileUpDownController {
 		// 下载文件路径
 		String realPath = "D:/temp";
 		File file = new File(realPath + File.separator + fileName);
-		InputStream in = new FileInputStream(file);// 将该文件加入到输入流之中
+		// 将该文件加入到输入流之中
+		InputStream in = new FileInputStream(file);
 		byte[] body = null;
 		// 返回下一次对此输入流调用的方法可以不受阻塞地从此输入流读取（或跳过）的估计剩余字节数
 		body = new byte[in.available()];
@@ -82,7 +83,8 @@ public class FileUpDownController {
 		// 设置响应头,通知浏览器以attachment（下载方式）打开图片
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Disposition", "attachment;filename=" + fileName);
-		HttpStatus statusCode = HttpStatus.OK;// 设置响应吗
+		// 设置响应吗
+		HttpStatus statusCode = HttpStatus.OK;
 		ResponseEntity<byte[]> responseEntity = new ResponseEntity<byte[]>(body, headers, statusCode);
 		return responseEntity;
 	}

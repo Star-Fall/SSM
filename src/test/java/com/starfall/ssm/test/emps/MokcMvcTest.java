@@ -32,10 +32,14 @@ import org.springframework.web.context.WebApplicationContext;
 @ContextConfiguration(locations = { "classpath:applicationContext.xml", "classpath:applicationContext-servlet.xml" })
 public class MokcMvcTest {
 
-	// 传入Springmvc的ioc
+	/**
+	 * 传入Springmvc的ioc
+	 */
 	@Autowired
 	private WebApplicationContext wac;
-	// 虚拟mvc请求，获取到处理结果。
+	/**
+	 * 虚拟mvc请求，获取到处理结果。
+	 */
 	private MockMvc mockMvc;
 
 	private Logger logger = Logger.getLogger(MokcMvcTest.class);

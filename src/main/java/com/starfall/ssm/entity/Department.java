@@ -1,43 +1,49 @@
 package com.starfall.ssm.entity;
 
+/**
+ * @name:Department
+ * @description: Department
+ * @author: StarFall
+ * @data: 2019年3月18日下午9:09:58
+ */
 public class Department {
-    private Integer departmentId;
+	private Integer departmentId;
 
-    private String departmentName;
+	private String departmentName;
 
-    private Integer managerId;
+	private Integer managerId;
 
-    private Integer locationId;
+	private Integer locationId;
 
-    public Integer getDepartmentId() {
-        return departmentId;
-    }
+	public Integer getDepartmentId() {
+		return departmentId;
+	}
 
-    public void setDepartmentId(Integer departmentId) {
-        this.departmentId = departmentId;
-    }
+	public void setDepartmentId(Integer departmentId) {
+		this.departmentId = departmentId;
+	}
 
-    public String getDepartmentName() {
-        return departmentName;
-    }
+	public String getDepartmentName() {
+		return departmentName;
+	}
 
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName == null ? null : departmentName.trim();
-    }
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName == null ? null : departmentName.trim();
+	}
 
-    public Integer getManagerId() {
-        return managerId;
-    }
+	public Integer getManagerId() {
+		return managerId;
+	}
 
-    public void setManagerId(Integer managerId) {
-        this.managerId = managerId;
-    }
+	public void setManagerId(Integer managerId) {
+		this.managerId = managerId;
+	}
 
-    public Integer getLocationId() {
-        return locationId;
-    }
+	public Integer getLocationId() {
+		return locationId;
+	}
 
-    public void setLocationId(Integer locationId) {
-        this.locationId = locationId;
-    }
+	public void setLocationId(Integer locationId) {
+		this.locationId = locationId;
+	}
 }

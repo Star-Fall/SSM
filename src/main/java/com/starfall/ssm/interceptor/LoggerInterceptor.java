@@ -32,12 +32,22 @@ public class LoggerInterceptor implements HandlerInterceptor {
 
 	@Autowired
 	private UrlLogService urlLogService;
-	// log4j
+	/**
+	 * log4j
+	 */
 	private Logger logger = Logger.getLogger(LoggerInterceptor.class);
-	// 本地线程存储消耗时间变量
-	private static final ThreadLocal<Long> costTimeThreadLocal = new NamedThreadLocal<>("costTimeThreadLocal");
-	// 本地线程存储log的id
-	private static final ThreadLocal<Integer> logIdThreadLocal = new NamedThreadLocal<>("logIdThreadLocal");
+	/**
+	 * 本地线程存储消耗时间变量
+	 */
+	private static final ThreadLocal<Long> COST_TIME_THREADLOCAL = new NamedThreadLocal<>("costTimeThreadLocal");
+	/**
+	 * 本地线程存储log的id
+	 */
+	private static final ThreadLocal<Integer> LOGID_THREADLOCAL = new NamedThreadLocal<>("logIdThreadLocal");
+	/**
+	 * 参数连接符
+	 */
+	private static final String PARAMS_FLAG = "&";
 
 	/**
 	 * 该方法在目标方法之前被调用.<br>
@@ -48,7 +58,7 @@ public class LoggerInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		long startTime = System.currentTimeMillis();
-		costTimeThreadLocal.set(startTime);
+		COST_TIME_THREADLOCAL.set(startTime);
 		// logger日志记录
 		logger.debug("********************LoggerInterceptor.begin********************");
 		logger.debug(
@@ -72,7 +82,7 @@ public class LoggerInterceptor implements HandlerInterceptor {
 		urlLogService.addLog(log);
 		// 获取自动生成的主键
 		Integer logId = log.getId();
-		logIdThreadLocal.set(logId);
+		LOGID_THREADLOCAL.set(logId);
 		return true;
 	}
 
@@ -90,10 +100,10 @@ public class LoggerInterceptor implements HandlerInterceptor {
 		logger.debug("最大可用内存:        " + (Runtime.getRuntime().maxMemory() - Runtime.getRuntime().totalMemory()
 				+ Runtime.getRuntime().freeMemory()) / 1024 / 1024 + "m");
 		long endTime = System.currentTimeMillis();
-		long startTime = costTimeThreadLocal.get();
+		long startTime = COST_TIME_THREADLOCAL.get();
 		logger.debug("耗时:             " + (endTime - startTime) + "ms");
 		// 更新log对象
-		Integer logId = logIdThreadLocal.get();
+		Integer logId = LOGID_THREADLOCAL.get();
 		UrlLog log = new UrlLog();
 		log.setId(logId);
 		log.setResponseStatus(String.valueOf(response.getStatus()));
@@ -101,8 +111,8 @@ public class LoggerInterceptor implements HandlerInterceptor {
 		urlLogService.updateLog(log);
 		logger.debug("********************LoggerInterceptor.end********************");
 		// 清除本地线程
-		logIdThreadLocal.remove();
-		costTimeThreadLocal.remove();
+		LOGID_THREADLOCAL.remove();
+		COST_TIME_THREADLOCAL.remove();
 	}
 
 	/**
@@ -133,7 +143,7 @@ public class LoggerInterceptor implements HandlerInterceptor {
 			}
 		}
 		if (sb.length() >= 1) {
-			if (sb.substring(sb.length() - 1, sb.length()).equals("&")) {
+			if (sb.substring(sb.length() - 1, sb.length()).equals(PARAMS_FLAG)) {
 				sb.deleteCharAt(sb.length() - 1);
 			}
 		}

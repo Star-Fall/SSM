@@ -22,7 +22,8 @@ public class RandomUtil {
 	 * 生成指定长度的小写字母字符串
 	 * 
 	 * @param length
-	 * @return
+	 *            长度
+	 * @return String
 	 */
 	public static String getRandomStringEnLow(int length) {
 		return RandomStringUtils.random(length, EN_LOW);
@@ -32,7 +33,8 @@ public class RandomUtil {
 	 * 生成指定长度的大写字母字符串
 	 * 
 	 * @param length
-	 * @return
+	 *            长度
+	 * @return String
 	 */
 	public static String getRandomStringEnUp(int length) {
 		return RandomStringUtils.random(length, EN_UP);
@@ -42,7 +44,8 @@ public class RandomUtil {
 	 * 生成指定长度的字母字符串
 	 * 
 	 * @param length
-	 * @return
+	 *            长度
+	 * @return String
 	 */
 	public static String getRandomStringEnUpAndLow(int length) {
 		return RandomStringUtils.random(length, EN_LOW + EN_UP);
@@ -52,7 +55,8 @@ public class RandomUtil {
 	 * 生成指定长度的数字字符串
 	 * 
 	 * @param length
-	 * @return
+	 *            长度
+	 * @return String
 	 */
 	public static String getRandomStringNum(int length) {
 		return RandomStringUtils.random(length, NUM);
@@ -62,8 +66,10 @@ public class RandomUtil {
 	 * 生成一定范围内的随机整数
 	 * 
 	 * @param max
+	 *            最大
 	 * @param min
-	 * @return
+	 *            最小
+	 * @return 随机整数
 	 */
 	public static int getRandomNumRange(int min, int max) {
 		Random random = new Random();
@@ -79,13 +85,15 @@ public class RandomUtil {
 	 *            结束日期
 	 * @param pattern
 	 *            日期格式
-	 * @return
+	 * @return 日期字符串
 	 */
 	public static String getRandomDateRange(String beginDate, String endDate, String pattern) {
 		try {
 			SimpleDateFormat format = new SimpleDateFormat(pattern);
-			Date start = format.parse(beginDate);// 构造开始日期
-			Date end = format.parse(endDate);// 构造结束日期
+			// 构造开始日期
+			Date start = format.parse(beginDate);
+			// 构造结束日期
+			Date end = format.parse(endDate);
 			if (start.getTime() >= end.getTime()) {
 				return null;
 			}
@@ -109,7 +117,8 @@ public class RandomUtil {
 	 * 随机获取集合中的元素：示例
 	 * 
 	 * @param list
-	 * @return
+	 *            List<Object>
+	 * @return Object
 	 */
 	public static Object getRandomItemList(List<Object> list) {
 		int index = getRandomNumRange(0, list.size() - 1);

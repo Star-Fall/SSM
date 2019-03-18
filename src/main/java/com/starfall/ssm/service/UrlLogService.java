@@ -26,8 +26,9 @@ public class UrlLogService {
 	 * 记录log
 	 * 
 	 * @param log
+	 *            UrlLog
 	 */
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public void addLog(UrlLog log) {
 		urlLogMapper.insertSelectiveGetId(log);
 	}
@@ -36,8 +37,9 @@ public class UrlLogService {
 	 * 更新log
 	 * 
 	 * @param log
+	 *            UrlLog
 	 */
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public void updateLog(UrlLog log) {
 		urlLogMapper.updateByPrimaryKeySelective(log);
 	}
